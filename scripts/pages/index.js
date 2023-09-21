@@ -1,28 +1,36 @@
-async function getPhotographers() {
+ async function getPhotographers() {
     const response = await fetch("data/photographers.json");
-    const photographers = await response.json();
-    /* et bien retourner le tableau photographers seulement une fois récupéré
-    return ({
-        photographers: [...photographers]
-    })*/
+    const data = await response.json();
+    //et bien retourner le tableau photographers seulement une fois récupéré
+    return (data.photographers)
 }
 
-const article = document.createElement( 'article' );
-const img = document.createElement( 'img' );
-img.setAttribute("src", picture)
-const h2 = document.createElement( 'h2' );
-h2.textContent = name;
-article.appendChild(img);
-article.appendChild(h2);
+function photographerTemplate(data) {
+    const {portrait, name, city, country, tagline, price} = data;
 
+    function getUserCardDOM() {
+        const article = document.createElement("article");
 
-/*function getPhotographers() {
-    let photographers = fetch('photographers.json')
-        .then(res => res.text())
-        .then(body => console.log(body))
-        .catch(err => console.log('erreur', err))
-    return ({
-        photographers})
+        const photographerimg = document.createElement("img");
+        photographerimg.src = portrait;
+        const photographername = document.createElement("h2");
+        photographername.textContent = name;
+        const photographerlocation = document.createElement("h3");
+        photographerlocation.innerText = `${city}, ${country}`;
+        const photographertag = document.createElement("h4");
+        photographertag.textContent = tagline;
+        const photographerprice = document.createElement("p");
+        photographerprice.textContent = `${price}/jour`
+
+        article.appendChild(photographerimg);
+        article.appendChild(photographername);
+        article.appendChild(photographerlocation);
+        article.appendChild(photographertag);
+        article.appendChild(photographerprice);
+
+        return (article);
+    }
+    return {portrait, name, city, country, tagline, price, getUserCardDOM }
 }
 
 async function displayData(photographers) {
@@ -33,13 +41,14 @@ async function displayData(photographers) {
         const userCardDOM = photographerModel.getUserCardDOM();
         photographersSection.appendChild(userCardDOM);
     });
-}*/
+}
 
 async function init() {
     // Récupère les datas des photographes
-    const { photographers } = await getPhotographers();
+    const photographers = await getPhotographers();
     displayData(photographers);
 }
 
-init();
-
+window.onload = function() {
+    init();
+}
