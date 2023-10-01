@@ -39,6 +39,14 @@ h1 {
     flex-direction: column;
 }
 
+.photographer_section article a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-decoration: none;
+}
+
 .photographer_section article img {
     height: 200px;
     width: 200px;

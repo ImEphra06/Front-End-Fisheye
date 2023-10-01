@@ -1,3 +1,4 @@
+ // Récupération des données de l'éléments phtographers dans le fichiers JSON
  async function getPhotographers() {
     const response = await fetch("data/photographers.json");
     const data = await response.json();
@@ -5,11 +6,15 @@
     return (data.photographers)
 }
 
+// Utilisation des données souhaitées
 function photographerTemplate(data) {
-    const {portrait, name, city, country, tagline, price} = data;
+    const {portrait, name, id, city, country, tagline, price} = data;
 
     function getUserCardDOM() {
         const article = document.createElement("article");
+
+        const link = document.createElement("a");
+        link.href = `photographer.html?id=${id}`;
 
         const photographerimg = document.createElement("img");
         photographerimg.src = portrait;
@@ -21,9 +26,10 @@ function photographerTemplate(data) {
         photographertag.textContent = tagline;
         const photographerprice = document.createElement("p");
         photographerprice.textContent = `${price}/jour`
-
-        article.appendChild(photographerimg);
-        article.appendChild(photographername);
+        
+        article.appendChild(link);
+        link.appendChild(photographerimg);
+        link.appendChild(photographername);
         article.appendChild(photographerlocation);
         article.appendChild(photographertag);
         article.appendChild(photographerprice);

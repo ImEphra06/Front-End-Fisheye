@@ -1,37 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
-  </head>
-  <body>
-    <header>
-      <img src="assets/images/logo.png" class="logo" />
-    </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-      </div>
-    </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
-  </body>
+
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <title>Fisheye - photographe </title>
+</head>
+
+<body>
+  <header>
+    <a href="index.html"><img src="images/logo.png" class="logo" alt="fisheye logo" /></a>
+  </header>
+
+  <main id="main">
+
+    <div class="photograph-header">
+      <div class="info"></div>
+      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <div class="portrait"></div>
+    </div>
+
+    <div id="sort">
+      <label class="sorttxt" for="select-trier">Trier par </label>
+      <select id="select-trier" onchange="trier(this)">
+          <option disabled selected>---</option>
+          <option>Popularité</option>
+          <option>Date</option>
+          <option>Titre</option>
+      </select>
+    </div>
+
+  </main>
+
+  <div id="contact_modal">
+    <div class="modal">
+      <header>
+        <h2>Contactez-moi</h2>
+        <img src="images/icons/close.svg" onclick="closeModal()" />
+      </header>
+      <form>
+        <div>
+          <label class="label-form">Prénom</label>
+          <input title="Modifier le prénom" class="champ-form action-form" id="form-name" type="text" required>
+          <label class="label-form">Nom</label>
+          <input title="Modifier le nom" class="champ-form action-form" id="form-lestname" type="text" required>
+          <label class="label-form">Email</label>
+          <input title="Modifier l'email" class="champ-form action-form" id="form-email" type="text" required>
+          <label class="label-form">Votre message</label>
+          <textarea title="Modifier le message" class="champ-form action-form" id="form-message" required></textarea>
+          <button title="Envoyer le message" class="btn-valider action-form" type="button" onclick="validerContact()">Envoyer</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="scripts/pages/photographer.js"></script>
+  <script src="scripts/utils/contactForm.js"></script>
+</body>
+
 </html>

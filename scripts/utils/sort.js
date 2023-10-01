@@ -1,0 +1,1 @@
+// Fonction pour trier les photos et videos du photographes
