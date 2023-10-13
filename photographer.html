@@ -16,25 +16,29 @@
 
   <main id="main">
 
-    <div class="photograph-header">
+    <section class="photograph-header">
       <div class="info"></div>
       <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       <div class="portrait"></div>
-    </div>
+    </section>
 
-    <div id="sort">
-      <label class="sorttxt" for="select-trier">Trier par </label>
-      <select id="select-trier" onchange="trier(this)">
+    <section class="sort">
+      <label for="sort-element">Trier par </label>
+      <select id="sort-element" onchange="trier(this)">
           <option disabled selected>---</option>
           <option>Popularité</option>
           <option>Date</option>
           <option>Titre</option>
       </select>
-    </div>
+    </section>
+
+    <section class="media"></div>
+
+    <section class="like"></div>
 
   </main>
 
-  <div id="contact_modal">
+  <section id="contact_modal">
     <div class="modal">
       <header>
         <h2>Contactez-moi</h2>
@@ -53,7 +57,7 @@
           <button title="Envoyer le message" class="btn-valider action-form" type="button" onclick="validerContact()">Envoyer</button>
       </form>
     </div>
-  </div>
+  </section>
 
   <script src="scripts/pages/photographer.js"></script>
   <script src="scripts/utils/contactForm.js"></script>

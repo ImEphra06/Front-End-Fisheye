@@ -1,4 +1,4 @@
-/****** General ***********/
+/***** General *****/
 * {
     font-family: 'DM-Sans', sans-serif;
 }
@@ -7,6 +7,8 @@
     display: none;
 }
 
+
+/***** Encadrer des photographes *****/
 .photograph-header {
     display: flex;
     flex-direction: row;
@@ -17,7 +19,6 @@
     margin: 0 100px;
     padding: 0 20px;
 }
-
 
 .photograph-header .info h2 {
     color: #D3573C;
@@ -60,6 +61,60 @@
     cursor: pointer;
 }
 
+/***** Tri *****/
+.sort {
+    display: flex;
+    margin: 10px 0px 30px 100px;
+    gap: 20px;
+}
+
+.sort-txt {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/***** Media du photographe *****/
+.media {
+    display: flex;
+    max-width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 100px;
+}
+
+.media .media-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.media .media-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.media .media-info h2 {
+    color: #901C1C;
+    font-size: 24px;
+}
+
+.media img {
+    height: 351px;
+    width: 350px;
+    object-fit: cover;
+}
+
+.media video {
+    height: 351px;
+    width: 350px;
+    object-fit: cover;
+}
+
+
+/***** Modal de contact *****/
 .modal {
     border-radius: 5px;
     background-color: #DB8876;

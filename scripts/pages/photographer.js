@@ -1,11 +1,11 @@
-//import getPhotographers from "index.js";
 async function getData() {
     const response = await fetch("data/photographers.json");
     const data = await response.json();
-    //et bien retourner le tableau photographers seulement une fois récupéré
+    //et bien retourner le tableau entier
     return (data)
 }
 
+// Création en HTML des données des photographes que l'on veut afficher 
 function photographerProfil(data) {
     const {name, city, country, tagline, portrait} = data;
 
@@ -13,27 +13,28 @@ function photographerProfil(data) {
         const info = document.createElement("div");
         info.className = "info";
         
-        const photographername = document.createElement("h2");
-        photographername.textContent = name;
-        const photographerlocation = document.createElement("h3");
-        photographerlocation.innerText = `${city}, ${country}`;
-        const photographertag = document.createElement("h4");
-        photographertag.textContent = tagline;
-        const photographerimg = document.createElement("img");
-        photographerimg.src = portrait;
+        const photographerName = document.createElement("h2");
+        photographerName.textContent = name;
+        const photographerLocation = document.createElement("h3");
+        photographerLocation.innerText = `${city}, ${country}`;
+        const photographerTag = document.createElement("h4");
+        photographerTag.textContent = tagline;
+        const photographerImg = document.createElement("img");
+        photographerImg.src = portrait;
 
-        info.appendChild(photographername);
-        info.appendChild(photographerlocation);
-        info.appendChild(photographertag);
+        info.appendChild(photographerName);
+        info.appendChild(photographerLocation);
+        info.appendChild(photographerTag);
 
         const portraitContainer = document.querySelector(".portrait");
-        portraitContainer.appendChild(photographerimg);
+        portraitContainer.appendChild(photographerImg);
 
         return {info, portrait: portraitContainer};
     }
     return {name, city, country, tagline, portrait, getUserCardDOM }
 }
 
+// Récupération des données des photographes
 async function displayData(photographers) {
     const photographersSection = document.querySelector(".photograph-header");
 
@@ -46,6 +47,49 @@ async function displayData(photographers) {
         photographersSection.appendChild(userCardDOM.info);
     });
 }
+
+
+function displayMedia(media) {
+    const mediaSection = document.querySelector(".media");
+
+    // Effacez le contenu existant
+    mediaSection.innerHTML = "";
+
+    media.forEach((mediaItem) => {
+        const mediaElement = document.createElement("div");
+        mediaElement.className = "media-item";
+        const mediaInfo = document.createElement("div");
+        mediaInfo.className = "media-info";
+        let mediaContent = null;
+
+        // Vérification si c'est une image ou une vidéo en fonction des données
+        if (mediaItem.image) {
+            mediaContent = document.createElement("img");
+            mediaContent.src = mediaItem.image;
+        } else if (mediaItem.video) {
+            mediaContent = document.createElement("video");
+            mediaContent.src = mediaItem.video;
+        }
+
+        const mediaTitle = document.createElement("h2");
+        mediaTitle.textContent = mediaItem.title;
+        const mediaLike = document.createElement("h2");
+        const likeNb = document.createElement("span");
+        likeNb.innerText = mediaItem.likes;
+        mediaLike.appendChild(likeNb);
+        const likeIcon = document.createElement("i");
+        likeIcon.className = "fa-solid fa-heart";
+        mediaLike.appendChild(likeIcon);
+
+        // Action sur i pour que qd on clique on aura like et unlike ce qui va modifier le nb de like
+        mediaElement.appendChild(mediaContent);
+        mediaElement.appendChild(mediaInfo);
+        mediaInfo.appendChild(mediaTitle);
+        mediaInfo.appendChild(mediaLike);
+        mediaSection.appendChild(mediaElement);
+    });
+}
+
 
 async function init() {
     // Récupère les datas des photographes
@@ -61,8 +105,6 @@ async function init() {
 
         // Récupère l'élément d'affichage depuis l'objet de données
         const infoElement = photographerData.getUserCardDOM().info;
-
-        // Assurez-vous d'avoir un élément HTML valide pour afficher les données
         const infoContainer = document.querySelector(".info");
 
         if (infoContainer) {
@@ -72,6 +114,13 @@ async function init() {
         } else {
             console.error('Element with class "info" not found');
         }
+    
+        // Filtrer les medias du photographe actuel
+        /*const photographermedia = data.media.find(media => media.photographerId == id);*/
+        const photographerMedia = data.media.filter(media => media.photographerId == id);
+        
+        // Afficher les médias du photographe sur la page
+        displayMedia(photographerMedia);
     } else {
         console.log("Photographer not found with ID: " + id);
     }
