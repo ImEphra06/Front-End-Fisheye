@@ -24,12 +24,15 @@ function trier(choixTrier) {
         default:
             break;
     }
+    
+// vider la section media et la reremplir 
 
-    sortTable.forEach(function (photo, index) {
+
+    /*sortTable.forEach(function (photo, index) {
         let indexModif = index + 1;
         let titreModif = photo.dataset.titre;
         photo.setAttribute("id", indexModif);
         photo.getElementsByClassName("lien-lightbox")[0].setAttribute("onclick", "ouvreLightbox(" + `${indexModif}` + ", '" + titreModif + "')")
         document.getElementById("profil-liste-photos").append(photo);
-    });
+    });*/
 }

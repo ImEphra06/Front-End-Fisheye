@@ -7,6 +7,9 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
   <title>Fisheye - photographe </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -18,7 +21,7 @@
 
     <section class="photograph-header">
       <div class="info"></div>
-      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <button class="contact-button" onclick="displayModal(name)">Contactez-moi</button>
       <div class="portrait"></div>
     </section>
 
@@ -32,35 +35,45 @@
       </select>
     </section>
 
-    <section class="media"></div>
+    <section class="media"></section>
 
-    <section class="like"></div>
+    <section class="like"></section>
+
+      <section id="lightbox">
+        <div class="lightbox-content">
+            <span class="close-lightbox" onclick="fermerLightbox()">&#x2715;</span>
+            <div id="contenu-photo-lightbox"></div>
+            <span class="titre-photo" id="titre-photo-lightbox"></span>
+            <span class="arrow" aria-label="Image précédente" id="left-arrow" onclick="flecheGauche(index)">&#8592;</span>
+            <span class="arrow" aria-label="Image suivante" id="right-arrow" onclick="flecheDroite(index)">&#8594;</span>
+        </div>
+    </section>
 
   </main>
 
-  <section id="contact_modal">
-    <div class="modal">
-      <header>
-        <h2>Contactez-moi</h2>
-        <img src="images/icons/close.svg" onclick="closeModal()" />
-      </header>
-      <form>
-        <div>
-          <label class="label-form">Prénom</label>
-          <input title="Modifier le prénom" class="champ-form action-form" id="form-name" type="text" required>
-          <label class="label-form">Nom</label>
-          <input title="Modifier le nom" class="champ-form action-form" id="form-lestname" type="text" required>
-          <label class="label-form">Email</label>
-          <input title="Modifier l'email" class="champ-form action-form" id="form-email" type="text" required>
-          <label class="label-form">Votre message</label>
-          <textarea title="Modifier le message" class="champ-form action-form" id="form-message" required></textarea>
-          <button title="Envoyer le message" class="btn-valider action-form" type="button" onclick="validerContact()">Envoyer</button>
-      </form>
-    </div>
+  <section class="modal">
+    <header>
+      <h2>Contactez-moi<span id="contact-name"></span></h2>
+      <img src="images/icons/close.svg" onclick="closeModal()" />
+    </header>
+    <form>
+        <label class="label-form">Prénom</label>
+        <input title="Modifier le prénom" class="champ-form action-form" id="form-name" type="text" required>
+        <label class="label-form">Nom</label>
+        <input title="Modifier le nom" class="champ-form action-form" id="form-lastname" type="text" required>
+        <label class="label-form">Email</label>
+        <input title="Modifier l'email" class="champ-form action-form" id="form-email" type="text" required>
+        <label class="label-form">Votre message</label>
+        <textarea title="Modifier le message" class="champ-form action-form" id="form-message" required></textarea>
+        <button title="Envoyer le message" class="btn-valid action-form" type="button" onclick="validContact()">Envoyer</button>
+    </form>
   </section>
 
+  <script src="scripts/utils/sort.js"></script>
+  <script src="scripts/utils/lightbox.js"></script>
   <script src="scripts/pages/photographer.js"></script>
   <script src="scripts/utils/contactForm.js"></script>
+    
 </body>
 
 </html>

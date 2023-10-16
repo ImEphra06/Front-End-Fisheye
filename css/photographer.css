@@ -48,7 +48,7 @@
     border-radius: 50%;
 }
 
-.contact_button {
+.contact-button {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -82,12 +82,12 @@
     justify-content: space-between;
     align-items: center;
     margin: 0 100px;
+    gap: 50px;
 }
 
 .media .media-item {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .media .media-info {
@@ -98,7 +98,8 @@
 
 .media .media-info h2 {
     color: #901C1C;
-    font-size: 24px;
+    font-size: 20px;
+    font-weight: 400;
 }
 
 .media img {
@@ -116,20 +117,27 @@
 
 /***** Modal de contact *****/
 .modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
+    display: none; /* Initialement masquée */
+    position: fixed;
+    top: 50%; /* Position verticale au milieu de l'écran */
+    left: 50%; /* Position horizontale au milieu de l'écran */
+    transform: translate(-50%, -50%); /* Pour centrer parfaitement la modale */
+    background: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour l'arrière-plan obscurci */
+    z-index: 999; /* Pour la superposer à d'autres éléments si nécessaire */
+    width: 80%; /* Largeur de la modale */
+    max-width: 400px; /* Largeur maximale */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .modal header {
+    background: #db8876;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 20px;
+    display: flex;
     justify-content: space-between;
-    width: 100%;
+    align-items: center;
 }
 
 .modal header img {
@@ -137,36 +145,48 @@
 }
 
 .modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
+    margin: 0;
 }
 
-form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-form label {
-    color: #312E2E;
-    font-size: 36px;
-}
-
-form div {
+.modal form {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+    background: #db8876;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 20px;
 }
 
-form input {
+.label-form {
+    display: block;
+    margin-top: 10px;
+}
+
+.champ-form {
     width: 100%;
-    height: 68px;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+textarea.champ-form {
+    height: 150px;
+    resize: none;
+}
+
+.btn-valid {
+    display: block;
+    width: 100%;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
- 
+.btn-valid:hover {
+    background-color: #d3573c;
+    color: #525252;
+    cursor: pointer;
+}

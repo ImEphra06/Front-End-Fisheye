@@ -116,7 +116,6 @@ async function init() {
         }
     
         // Filtrer les medias du photographe actuel
-        /*const photographermedia = data.media.find(media => media.photographerId == id);*/
         const photographerMedia = data.media.filter(media => media.photographerId == id);
         
         // Afficher les médias du photographe sur la page
