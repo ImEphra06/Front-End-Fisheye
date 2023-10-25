@@ -48,14 +48,28 @@ async function displayData(photographers) {
     });
 }
 
+let mediaItem = null;
+
+// Fonction pour additionner les likes de tous les médias
+function sumMediaLikes(mediaItem) {
+    let totalLikes = 0;
+
+    for (const media of mediaItem) {
+        totalLikes += media.likes;
+    }
+
+    return totalLikes;
+}
 
 function displayMedia(media) {
     const mediaSection = document.querySelector(".media");
+    const likeSection = document.querySelector(".like");
+    
 
     // Effacez le contenu existant
     mediaSection.innerHTML = "";
 
-    media.forEach((mediaItem) => {
+    media.forEach((mediaItem, index) => {
         const mediaElement = document.createElement("div");
         mediaElement.className = "media-item";
         const mediaInfo = document.createElement("div");
@@ -70,6 +84,28 @@ function displayMedia(media) {
             mediaContent = document.createElement("video");
             mediaContent.src = mediaItem.video;
         }
+		mediaContent.addEventListener("click", () => {
+            const lightbox = document.getElementById("lightbox");
+            const mediaData = mediaItem;
+            const selectedMedia = mediaData[index]; // Obtenez le média sélectionné
+        
+            // Mettez à jour le contenu de la lightbox (image ou vidéo)
+            const lightboxContent = document.getElementById("lightbox-content");
+            lightboxContent.innerHTML = ""; // Effacez le contenu existant
+        
+            if (selectedMedia.image) {
+                const image = document.createElement("img");
+                image.src = selectedMedia.image;
+                lightboxContent.appendChild(image);
+            } else if (selectedMedia.video) {
+                const video = document.createElement("video");
+                video.src = selectedMedia.video;
+                lightboxContent.appendChild(video);
+            }
+        
+            // Affichez la lightbox au centre de l'écran
+            lightbox.style.display = "block";
+		});
 
         const mediaTitle = document.createElement("h2");
         mediaTitle.textContent = mediaItem.title;
@@ -88,8 +124,19 @@ function displayMedia(media) {
         mediaInfo.appendChild(mediaLike);
         mediaSection.appendChild(mediaElement);
     });
+
+    const totalLikes = sumMediaLikes(mediaItem);
+    const totalLikesElement = document.createElement("p");
+    totalLikesElement.textContent = totalLikes;
+    const photographerPrice = document.createElement("p");
+    photographerPrice.textContent = `${photographer.price}/jour`
+    
+    likeSection.appendChild(totalLikesElement);
+    likeSection.appendChild(photographerPrice);
 }
 
+let photographer = null;
+let photographerMedia = [];
 
 async function init() {
     // Récupère les datas des photographes
@@ -97,7 +144,7 @@ async function init() {
     const paramsString = window.location.search.substring(1);
     const searchParams = new URLSearchParams(paramsString);
     const id = searchParams.get("id");
-    const photographer = data.photographers.find(photographer => photographer.id == id);
+    photographer = data.photographers.find(photographer => photographer.id == id);
 
     if (photographer) {
         // Crée un objet de données du photographe avec une structure HTML
@@ -116,7 +163,7 @@ async function init() {
         }
     
         // Filtrer les medias du photographe actuel
-        const photographerMedia = data.media.filter(media => media.photographerId == id);
+        photographerMedia = data.media.filter(media => media.photographerId == id);
         
         // Afficher les médias du photographe sur la page
         displayMedia(photographerMedia);

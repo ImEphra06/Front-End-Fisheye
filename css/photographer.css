@@ -73,7 +73,24 @@
     font-weight: bold;
 }
 
-/***** Media du photographe *****/
+.sort > select {
+    background-color: #D3573C;
+    border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: #ffffff;
+    font-size: 18px;
+    height: 60px;
+    padding: 0 5px;
+    width: 150px;
+}
+
+.sort > select > option {
+    border-top: 1px solid #ffffff;
+}
+
+
+/***** Medias du photographe *****/
 .media {
     display: flex;
     max-width: 100%;
@@ -112,6 +129,15 @@
     height: 351px;
     width: 350px;
     object-fit: cover;
+}
+
+
+/***** Lightbox *****/
+.lightbox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
@@ -189,4 +215,17 @@ textarea.champ-form {
     background-color: #d3573c;
     color: #525252;
     cursor: pointer;
+}
+
+/***** informations like et tarif *****/
+.like {
+    background-color: #d3573c;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    bottom: 0;
+    font-size: 18px;
+    padding: 10px 15px;
+    position: fixed;
+    right: 35px;
+    width: fit-content;
 }

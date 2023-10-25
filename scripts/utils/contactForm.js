@@ -1,8 +1,8 @@
-function displayModal(name) {
+function displayModal() {
     document.getElementsByTagName("body")[0].style.overflow = "hidden";
     document.querySelector(".modal").style.display = "block";
     document.getElementsByClassName("contact-button")[0].style.display = "none";
-    document.getElementById("contact-name").innerHTML = name;
+    document.getElementById("contact-name").innerHTML = photographer.name;
     
     /***** Gestion des flèches du clavier *****/
     const actionForm = document.querySelectorAll('.action-form');
