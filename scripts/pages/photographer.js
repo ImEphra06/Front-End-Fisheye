@@ -48,26 +48,15 @@ async function displayData(photographers) {
     });
 }
 
-let mediaItem = null;
-
-// Fonction pour additionner les likes de tous les médias
-function sumMediaLikes(mediaItem) {
-    let totalLikes = 0;
-
-    for (const media of mediaItem) {
-        totalLikes += media.likes;
-    }
-
-    return totalLikes;
-}
-
 function displayMedia(media) {
     const mediaSection = document.querySelector(".media");
-    const likeSection = document.querySelector(".like");
+    const ongletSection = document.querySelector(".onglet");
+    const totalLike = document.createElement("div");
+    totalLike.className = "total-like";
     
-
     // Effacez le contenu existant
     mediaSection.innerHTML = "";
+	let totalLikes = 0;
 
     media.forEach((mediaItem, index) => {
         const mediaElement = document.createElement("div");
@@ -75,7 +64,6 @@ function displayMedia(media) {
         const mediaInfo = document.createElement("div");
         mediaInfo.className = "media-info";
         let mediaContent = null;
-
         // Vérification si c'est une image ou une vidéo en fonction des données
         if (mediaItem.image) {
             mediaContent = document.createElement("img");
@@ -84,27 +72,9 @@ function displayMedia(media) {
             mediaContent = document.createElement("video");
             mediaContent.src = mediaItem.video;
         }
+
 		mediaContent.addEventListener("click", () => {
-            const lightbox = document.getElementById("lightbox");
-            const mediaData = mediaItem;
-            const selectedMedia = mediaData[index]; // Obtenez le média sélectionné
-        
-            // Mettez à jour le contenu de la lightbox (image ou vidéo)
-            const lightboxContent = document.getElementById("lightbox-content");
-            lightboxContent.innerHTML = ""; // Effacez le contenu existant
-        
-            if (selectedMedia.image) {
-                const image = document.createElement("img");
-                image.src = selectedMedia.image;
-                lightboxContent.appendChild(image);
-            } else if (selectedMedia.video) {
-                const video = document.createElement("video");
-                video.src = selectedMedia.video;
-                lightboxContent.appendChild(video);
-            }
-        
-            // Affichez la lightbox au centre de l'écran
-            lightbox.style.display = "block";
+            openLightbox(index);
 		});
 
         const mediaTitle = document.createElement("h2");
@@ -116,23 +86,28 @@ function displayMedia(media) {
         const likeIcon = document.createElement("i");
         likeIcon.className = "fa-solid fa-heart";
         mediaLike.appendChild(likeIcon);
-
+        
         // Action sur i pour que qd on clique on aura like et unlike ce qui va modifier le nb de like
         mediaElement.appendChild(mediaContent);
         mediaElement.appendChild(mediaInfo);
         mediaInfo.appendChild(mediaTitle);
         mediaInfo.appendChild(mediaLike);
         mediaSection.appendChild(mediaElement);
+		totalLikes += mediaItem.likes;
     });
 
-    const totalLikes = sumMediaLikes(mediaItem);
+    ongletSection.innerHTML = "";
     const totalLikesElement = document.createElement("p");
     totalLikesElement.textContent = totalLikes;
+    const likeIcon = document.createElement("i");
+    likeIcon.className = "fa-solid fa-heart";
     const photographerPrice = document.createElement("p");
-    photographerPrice.textContent = `${photographer.price}/jour`
+    photographerPrice.textContent = `${photographer.price} / jour`
     
-    likeSection.appendChild(totalLikesElement);
-    likeSection.appendChild(photographerPrice);
+    ongletSection.appendChild(totalLike);
+    totalLike.appendChild(totalLikesElement);
+    totalLike.appendChild(likeIcon);
+    ongletSection.appendChild(photographerPrice);
 }
 
 let photographer = null;
@@ -167,6 +142,7 @@ async function init() {
         
         // Afficher les médias du photographe sur la page
         displayMedia(photographerMedia);
+        //openLightbox(0, photographerMedia);
     } else {
         console.log("Photographer not found with ID: " + id);
     }
