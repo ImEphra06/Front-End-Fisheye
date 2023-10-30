@@ -87,7 +87,16 @@ function displayMedia(media) {
         likeIcon.className = "fa-solid fa-heart";
         mediaLike.appendChild(likeIcon);
         
-        // Action sur i pour que qd on clique on aura like et unlike ce qui va modifier le nb de like
+        // Ajoutez un gestionnaire d'événements pour incrémenter les likes
+        likeIcon.addEventListener("click", () => {
+            // Incrémentez le nombre de likes
+            mediaItem.likes += 1;
+            // Mettez à jour l'affichage du nombre de likes
+            likeNb.innerText = mediaItem.likes;
+            totalLikes += 1;
+            totalLikesElement.textContent = totalLikes; // Mettez à jour l'affichage du total
+        });
+
         mediaElement.appendChild(mediaContent);
         mediaElement.appendChild(mediaInfo);
         mediaInfo.appendChild(mediaTitle);
@@ -102,7 +111,7 @@ function displayMedia(media) {
     const likeIcon = document.createElement("i");
     likeIcon.className = "fa-solid fa-heart";
     const photographerPrice = document.createElement("p");
-    photographerPrice.textContent = `${photographer.price} / jour`
+    photographerPrice.textContent = `${photographer.price}€ / jour`
     
     ongletSection.appendChild(totalLike);
     totalLike.appendChild(totalLikesElement);
