@@ -1,3 +1,6 @@
+const modal = document.querySelector(".modal");
+const openModalButton = document.querySelector(".contact-button");
+
 function displayModal() {
     document.getElementsByTagName("body")[0].style.overflow = "hidden";
     document.querySelector(".modal").style.display = "block";
@@ -48,3 +51,33 @@ function validContact() {
     document.querySelector(".modal").style.display = "none";
     document.getElementsByClassName("contact-button")[0].style.display = "block";
 }
+
+// Écoutez le clic sur le bouton pour ouvrir la modal
+openModalButton.addEventListener("click", () => {
+    modal.style.display = "block";
+});
+
+// Écoutez les événements au clavier pour gérer la navigation Tab
+modal.addEventListener("keydown", (event) => {
+    if (event.key === "Tab") {
+        // Récupérez tous les éléments focusables dans la modal
+        const focusableElements = modal.querySelectorAll("input, textarea, button");
+
+        // Récupérez l'index de l'élément actif
+        const activeElementIndex = Array.from(focusableElements).findIndex((element) => element === document.activeElement);
+
+        if (activeElementIndex === -1) {
+            // Si l'élément actif n'est pas à l'intérieur de la modal, ramenez-le au premier élément
+            focusableElements[0].focus();
+            event.preventDefault();
+        } else if (event.shiftKey && activeElementIndex === 0) {
+            // Si Shift + Tab est enfoncé sur le premier élément, déplacez le focus vers le dernier élément
+            focusableElements[focusableElements.length - 1].focus();
+            event.preventDefault();
+        } else if (!event.shiftKey && activeElementIndex === focusableElements.length - 1) {
+            // Si Tab est enfoncé sur le dernier élément, déplacez le focus vers le premier élément
+            focusableElements[0].focus();
+            event.preventDefault();
+        }
+    }
+});

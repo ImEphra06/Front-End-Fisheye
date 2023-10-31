@@ -38,19 +38,33 @@ function closeLightbox() {
 let index = 0;
 
 function flecheGauche() {
-    // Vérifiez si l'index actuel est supérieur à 0
-    if (index > 0) {
-        index--; // Décrémentez l'index pour afficher le média précédent
-        openLightbox(index); // Appelez une fonction pour afficher le nouveau média
+    if (photographerMedia.length === 0) {
+        return;
     }
+
+    if (index === 0) {
+        // Si on est au premier média, passez au dernier
+        index = photographerMedia.length - 1;
+    } else {
+        index--;
+    }
+
+    openLightbox(index);
 }
 
 function flecheDroite() {
-    // Vérifiez si l'index actuel est inférieur à la dernière position de média
-    if (index < photographerMedia.length - 1) {
-        index++; // Incrémentez l'index pour afficher le média suivant
-        openLightbox(index); // Appelez une fonction pour afficher le nouveau média
+    if (photographerMedia.length === 0) {
+        return;
     }
+
+    if (index === photographerMedia.length - 1) {
+        // Si on est au dernier média, passez au premier
+        index = 0;
+    } else {
+        index++;
+    }
+
+    openLightbox(index);
 }
 
 document.addEventListener("keydown", function(event) {

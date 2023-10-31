@@ -53,19 +53,19 @@
 
   <section class="modal">
     <header>
-      <h2>Contactez-moi<span id="contact-name"></span></h2>
-      <img src="images/icons/close.svg" onclick="closeModal()" />
+      <h2>Contactez-moi<span id="contact-name" tabindex="0"></span></h2>
+      <img src="images/icons/close.svg" onclick="closeModal()" tabindex="0" />
     </header>
     <form>
         <label class="label-form">Prénom</label>
-        <input title="Modifier le prénom" class="champ-form action-form" id="form-name" type="text" required>
+        <input title="Modifier le prénom" class="champ-form action-form" id="form-name" type="text" required tabindex="0">
         <label class="label-form">Nom</label>
-        <input title="Modifier le nom" class="champ-form action-form" id="form-lastname" type="text" required>
+        <input title="Modifier le nom" class="champ-form action-form" id="form-lastname" type="text" required tabindex="0">
         <label class="label-form">Email</label>
-        <input title="Modifier l'email" class="champ-form action-form" id="form-email" type="text" required>
+        <input title="Modifier l'email" class="champ-form action-form" id="form-email" type="text" required tabindex="0">
         <label class="label-form">Votre message</label>
-        <textarea title="Modifier le message" class="champ-form action-form" id="form-message" required></textarea>
-        <button title="Envoyer le message" class="btn-valid action-form" type="button" onclick="validContact()">Envoyer</button>
+        <textarea title="Modifier le message" class="champ-form action-form" id="form-message" required tabindex="0"></textarea>
+        <button title="Envoyer le message" class="btn-valid action-form" type="button" onclick="validContact()" tabindex="0">Envoyer</button>
     </form>
   </section>
 
