@@ -25,7 +25,7 @@ function photographerTemplate(data) {
         const photographertag = document.createElement("h4");
         photographertag.textContent = tagline;
         const photographerprice = document.createElement("p");
-        photographerprice.textContent = `${price}/jour`
+        photographerprice.textContent = `${price}€ / jour`
         
         article.appendChild(link);
         link.appendChild(photographerimg);

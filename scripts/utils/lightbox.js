@@ -1,8 +1,10 @@
 /***** Ouvrir la lightbox *****/
-
 let globalIndex = 0;
 
 function openLightbox(index) {
+    document.getElementsByTagName("body")[0].style.overflow = "hidden";
+    document.querySelector(".lightbox").style.display = "block";
+    
     if (index >= 0 && index < photographerMedia.length) {
         globalIndex = index;
         const selectedMedia = photographerMedia[index];
@@ -22,15 +24,14 @@ function openLightbox(index) {
         const titrePhotoLightbox = document.getElementById("titre-photo-lightbox");
         titrePhotoLightbox.textContent = selectedMedia.title;
 
-        const lightbox = document.getElementById("lightbox");
-        lightbox.classList.remove("hidden"); // Retirez la classe "hidden" pour afficher la lightbox
+        const lightbox = document.querySelector(".lightbox");
     }
 }
 
-/***** Ferme la lightbox *****/
+/***** Fermer la lightbox *****/
 function closeLightbox() {
-    const lightbox = document.getElementById("lightbox");
-    lightbox.classList.add("hidden"); // Ajoutez à nouveau la classe "hidden" pour masquer la lightbox
+    document.getElementsByTagName("body")[0].style.overflow = "unset";
+    document.querySelector(".lightbox").style.display = "none";
 }
 
 // Variable globale pour stocker l'index du média actuellement affiché
@@ -51,3 +52,13 @@ function flecheDroite() {
         openLightbox(index); // Appelez une fonction pour afficher le nouveau média
     }
 }
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "ArrowLeft") {
+        // Appeler la fonction flecheGauche lorsque la touche gauche est enfoncée
+        flecheGauche();
+    } else if (event.key === "ArrowRight") {
+        // Appeler la fonction flecheDroite lorsque la touche droite est enfoncée
+        flecheDroite();
+    }
+});

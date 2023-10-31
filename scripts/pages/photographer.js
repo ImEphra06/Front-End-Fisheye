@@ -86,6 +86,19 @@ function displayMedia(media) {
         const likeIcon = document.createElement("i");
         likeIcon.className = "fa-solid fa-heart";
         mediaLike.appendChild(likeIcon);
+
+        /*const likeIcon = document.createElement("div");
+        likeIcon.className = "heart";
+        const likeIcon1 = document.createElement("img");
+        likeIcon1.src = "images/icons/heart.svg";
+        likeIcon1.className = "heart_empty";
+        const likeIcon2 = document.createElement("img");
+        likeIcon2.src = "images/icons/heart_full.svg";
+        likeIcon2.className = "heart_full";
+        
+        mediaLike.appendChild(likeIcon);
+        likeIcon.appendChild(likeIcon1);
+        likeIcon.appendChild(likeIcon2);*/
         
         // Ajoutez un gestionnaire d'événements pour incrémenter les likes
         likeIcon.addEventListener("click", () => {
