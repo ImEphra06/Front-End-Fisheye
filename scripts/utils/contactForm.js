@@ -58,10 +58,11 @@ openModalButton.addEventListener("click", () => {
 });
 
 // Écoutez les événements au clavier pour gérer la navigation Tab
-modal.addEventListener("keydown", (event) => {
-    if (event.key === "Tab") {
+modal.addEventListener("keydown", (e) => {
+    if (e.key === "Tab") {
         // Récupérez tous les éléments focusables dans la modal
         const focusableElements = modal.querySelectorAll("input, textarea, button");
+        const closeButton = document.querySelector('img[tabindex="0"]');
 
         // Récupérez l'index de l'élément actif
         const activeElementIndex = Array.from(focusableElements).findIndex((element) => element === document.activeElement);
@@ -75,9 +76,15 @@ modal.addEventListener("keydown", (event) => {
             focusableElements[focusableElements.length - 1].focus();
             event.preventDefault();
         } else if (!event.shiftKey && activeElementIndex === focusableElements.length - 1) {
-            // Si Tab est enfoncé sur le dernier élément, déplacez le focus vers le premier élément
-            focusableElements[0].focus();
+            // Si Tab est enfoncé sur le dernier élément, déplacez le focus vers le bouton de fermeture
+            closeButton.focus();
             event.preventDefault();
         }
+    }
+});
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        closeModal();
     }
 });

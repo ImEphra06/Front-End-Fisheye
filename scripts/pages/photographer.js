@@ -83,11 +83,8 @@ function displayMedia(media) {
         const likeNb = document.createElement("span");
         likeNb.innerText = mediaItem.likes;
         mediaLike.appendChild(likeNb);
-        const likeIcon = document.createElement("i");
-        likeIcon.className = "fa-solid fa-heart";
-        mediaLike.appendChild(likeIcon);
 
-        /*const likeIcon = document.createElement("div");
+        const likeIcon = document.createElement("div");
         likeIcon.className = "heart";
         const likeIcon1 = document.createElement("img");
         likeIcon1.src = "images/icons/heart.svg";
@@ -98,16 +95,32 @@ function displayMedia(media) {
         
         mediaLike.appendChild(likeIcon);
         likeIcon.appendChild(likeIcon1);
-        likeIcon.appendChild(likeIcon2);*/
+        likeIcon.appendChild(likeIcon2);
         
-        // Ajoutez un gestionnaire d'événements pour incrémenter les likes
+        let isLiked = false; // Variable pour suivre l'état du like
+
         likeIcon.addEventListener("click", () => {
-            // Incrémentez le nombre de likes
-            mediaItem.likes += 1;
-            // Mettez à jour l'affichage du nombre de likes
-            likeNb.innerText = mediaItem.likes;
-            totalLikes += 1;
-            totalLikesElement.textContent = totalLikes; // Mettez à jour l'affichage du total
+            let DOMLikes = parseInt(likeNb.innerText);
+            
+            if (DOMLikes === mediaItem.likes) {
+                // L'utilisateur n'a pas encore liké ce média, donc on incrémente
+                likeIcon1.style.opacity = 0;
+                likeIcon2.style.opacity = 1;
+                DOMLikes += 1;
+                totalLikes += 1; // Incrémentez également le total de likes
+            } else {
+                // L'utilisateur a déjà liké ce média, donc on décrémente
+                likeIcon1.style.opacity = 1;
+                likeIcon2.style.opacity = 0;
+                DOMLikes -= 1;
+                totalLikes -= 1; // Décrémentez le total de likes
+            }
+
+            // Affichage du nouveau nombre de likes dans le HTML
+            likeNb.innerText = DOMLikes;
+        
+            // Mettez à jour l'affichage du nombre total de likes
+            totalLikesElement.textContent = totalLikes;
         });
 
         mediaElement.appendChild(mediaContent);
@@ -170,7 +183,6 @@ async function init() {
     }
 }
     
-// js array filter pour la liste de media
 window.onload = function() {
     init();
 }

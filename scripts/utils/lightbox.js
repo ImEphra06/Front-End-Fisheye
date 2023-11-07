@@ -76,3 +76,9 @@ document.addEventListener("keydown", function(event) {
         flecheDroite();
     }
 });
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        closeLightbox(); // Appel de la fonction pour fermer la lightbox
+    }
+});
