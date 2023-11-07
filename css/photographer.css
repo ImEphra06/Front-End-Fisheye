@@ -198,7 +198,6 @@
     width: 710px;
     height: 680px;
     object-fit: cover;
-    overflow-clip-margin: content-box;
     overflow: clip;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }

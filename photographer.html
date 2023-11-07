@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
   <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -28,10 +28,10 @@
     <section class="sort">
       <label class="sort-txt" for="sort-element">Trier par </label>
       <select id="sort-element" onchange="trier(this)">
-          <option disabled selected>---</option>
-          <option>Popularité</option>
-          <option>Date</option>
-          <option>Titre</option>
+        <option disabled selected>---</option>
+        <option>Popularité</option>
+        <option>Date</option>
+        <option>Titre</option>
       </select>
     </section>
 
@@ -41,11 +41,11 @@
 
     <section class="lightbox">
       <div class="lightbox-content">
-          <span class="close-lightbox" onclick="closeLightbox()">&#x2715;</span>
-          <div id="contenu-photo-lightbox"></div>
-          <span class="titre-photo" id="titre-photo-lightbox"></span>
-          <span class="arrow" aria-label="Image précédente" id="left-arrow" onclick="flecheGauche(index)">&#8592;</span>
-          <span class="arrow" aria-label="Image suivante" id="right-arrow" onclick="flecheDroite(index)">&#8594;</span>
+        <span class="close-lightbox" onclick="closeLightbox()">&#x2715;</span>
+        <div id="contenu-photo-lightbox"></div>
+        <span class="titre-photo" id="titre-photo-lightbox"></span>
+        <span class="arrow" id="left-arrow" onclick="flecheGauche(index)">&#8592;</span>
+        <span class="arrow" id="right-arrow" onclick="flecheDroite(index)">&#8594;</span>
       </div>
     </section>
 
@@ -54,18 +54,21 @@
   <section class="modal">
     <header>
       <h2>Contactez-moi<span id="contact-name" tabindex="0"></span></h2>
-      <img src="images/icons/close.svg" onclick="closeModal()" tabindex="0" />
+      <img src="images/icons/close.svg" onclick="closeModal()" alt="Bouton fermé" tabindex="0"/>
     </header>
     <form>
-        <label class="label-form">Prénom</label>
-        <input title="Modifier le prénom" class="champ-form action-form" id="form-name" type="text" required tabindex="0">
-        <label class="label-form">Nom</label>
-        <input title="Modifier le nom" class="champ-form action-form" id="form-lastname" type="text" required tabindex="0">
-        <label class="label-form">Email</label>
-        <input title="Modifier l'email" class="champ-form action-form" id="form-email" type="text" required tabindex="0">
-        <label class="label-form">Votre message</label>
-        <textarea title="Modifier le message" class="champ-form action-form" id="form-message" required tabindex="0"></textarea>
-        <button title="Envoyer le message" class="btn-valid action-form" type="button" onclick="validContact()" tabindex="0">Envoyer</button>
+      <label class="label-form">Prénom</label>
+      <input title="Modifier le prénom" class="champ-form action-form" id="form-name" type="text" required tabindex="0">
+      <label class="label-form">Nom</label>
+      <input title="Modifier le nom" class="champ-form action-form" id="form-lastname" type="text" required
+        tabindex="0">
+      <label class="label-form">Email</label>
+      <input title="Modifier l'email" class="champ-form action-form" id="form-email" type="text" required tabindex="0">
+      <label class="label-form">Votre message</label>
+      <textarea title="Modifier le message" class="champ-form action-form" id="form-message" required
+        tabindex="0"></textarea>
+      <button title="Envoyer le message" class="btn-valid action-form" type="button" onclick="validContact()"
+        tabindex="0">Envoyer</button>
     </form>
   </section>
 
@@ -73,7 +76,7 @@
   <script src="scripts/utils/lightbox.js"></script>
   <script src="scripts/pages/photographer.js"></script>
   <script src="scripts/utils/contactForm.js"></script>
-    
+
 </body>
 
 </html>
