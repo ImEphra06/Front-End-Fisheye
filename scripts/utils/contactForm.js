@@ -52,11 +52,6 @@ function validContact() {
     document.getElementsByClassName("contact-button")[0].style.display = "block";
 }
 
-// Écoutez le clic sur le bouton pour ouvrir la modal
-openModalButton.addEventListener("click", () => {
-    modal.style.display = "block";
-});
-
 // Écoutez les événements au clavier pour gérer la navigation Tab
 modal.addEventListener("keydown", (e) => {
     if (e.key === "Tab") {

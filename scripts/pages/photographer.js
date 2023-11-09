@@ -96,8 +96,6 @@ function displayMedia(media) {
         mediaLike.appendChild(likeIcon);
         likeIcon.appendChild(likeIcon1);
         likeIcon.appendChild(likeIcon2);
-        
-        let isLiked = false; // Variable pour suivre l'état du like
 
         likeIcon.addEventListener("click", () => {
             let DOMLikes = parseInt(likeNb.innerText);

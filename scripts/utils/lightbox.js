@@ -23,8 +23,6 @@ function openLightbox(index) {
 
         const titrePhotoLightbox = document.getElementById("titre-photo-lightbox");
         titrePhotoLightbox.textContent = selectedMedia.title;
-
-        const lightbox = document.querySelector(".lightbox");
     }
 }
 
