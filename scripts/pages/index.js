@@ -16,23 +16,24 @@ function photographerTemplate(data) {
         const link = document.createElement("a");
         link.href = `photographer.html?id=${id}`;
 
-        const photographerimg = document.createElement("img");
-        photographerimg.src = portrait;
-        const photographername = document.createElement("h2");
-        photographername.textContent = name;
-        const photographerlocation = document.createElement("h3");
-        photographerlocation.innerText = `${city}, ${country}`;
-        const photographertag = document.createElement("h4");
-        photographertag.textContent = tagline;
-        const photographerprice = document.createElement("p");
-        photographerprice.textContent = `${price}€ / jour`
+        const photographerImg = document.createElement("img");
+        photographerImg.src = portrait;
+        photographerImg.alt = `Photographer portrait - ${name}`;
+        const photographerName = document.createElement("h2");
+        photographerName.textContent = name;
+        const photographerLocation = document.createElement("h3");
+        photographerLocation.innerText = `${city}, ${country}`;
+        const photographerTag = document.createElement("h4");
+        photographerTag.textContent = tagline;
+        const photographerPrice = document.createElement("p");
+        photographerPrice.textContent = `${price}€ / jour`
         
         article.appendChild(link);
-        link.appendChild(photographerimg);
-        link.appendChild(photographername);
-        article.appendChild(photographerlocation);
-        article.appendChild(photographertag);
-        article.appendChild(photographerprice);
+        link.appendChild(photographerImg);
+        link.appendChild(photographerName);
+        article.appendChild(photographerLocation);
+        article.appendChild(photographerTag);
+        article.appendChild(photographerPrice);
 
         return (article);
     }

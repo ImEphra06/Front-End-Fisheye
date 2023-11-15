@@ -21,6 +21,7 @@ function photographerProfil(data) {
         photographerTag.textContent = tagline;
         const photographerImg = document.createElement("img");
         photographerImg.src = portrait;
+        photographerImg.alt = `Photographer portrait - ${name}`;
 
         info.appendChild(photographerName);
         info.appendChild(photographerLocation);
@@ -48,18 +49,12 @@ async function displayData(photographers) {
     });
 }
 
-// Afficher les medias du photographes
-function displayMedia(media) {
-    const mediaSection = document.querySelector(".media");
-    const ongletSection = document.querySelector(".onglet");
-    const totalLike = document.createElement("div");
-    totalLike.className = "total-like";
-    
-    // Effacez le contenu existant
-    mediaSection.innerHTML = "";
-	let totalLikes = 0;
+let totalLikesElement;
+let totalLikes = 0;
 
-    media.forEach((mediaItem, index) => {
+function mediaTemplate(mediaItem, index) {
+
+    function getUserMediaDOM() {
         const mediaElement = document.createElement("div");
         mediaElement.className = "media-item";
         const mediaInfo = document.createElement("div");
@@ -69,36 +64,63 @@ function displayMedia(media) {
         if (mediaItem.image) {
             mediaContent = document.createElement("img");
             mediaContent.src = mediaItem.image;
+            mediaContent.alt = generateAltText(mediaItem);
+            mediaContent.setAttribute("tabindex", "0");
+            mediaContent.addEventListener("keydown", (event) => {
+                if (event.key === "Enter") {
+                    openLightbox(index);
+                }
+            });
         } else if (mediaItem.video) {
             mediaContent = document.createElement("video");
             mediaContent.src = mediaItem.video;
+            mediaContent.alt = generateAltText(mediaItem);
+            mediaContent.setAttribute("tabindex", "0");
+            mediaContent.addEventListener("keydown", (event) => {
+                if (event.key === "Enter") {
+                    openLightbox(index);
+                }
+            });
         }
-
-		mediaContent.addEventListener("click", () => {
+    
+        mediaContent.addEventListener("click", () => {
             openLightbox(index);
-		});
-
+        });
+    
         const mediaTitle = document.createElement("h2");
         mediaTitle.textContent = mediaItem.title;
         const mediaLike = document.createElement("h2");
         const likeNb = document.createElement("span");
         likeNb.innerText = mediaItem.likes;
         mediaLike.appendChild(likeNb);
-
+    
         const likeIcon = document.createElement("div");
         likeIcon.className = "heart";
+        likeIcon.setAttribute("tabindex", "0");
         const likeIcon1 = document.createElement("img");
         likeIcon1.src = "images/icons/heart.svg";
+        likeIcon1.alt = "Heart icon - not liked";
         likeIcon1.className = "heart_empty";
         const likeIcon2 = document.createElement("img");
         likeIcon2.src = "images/icons/heart_full.svg";
+        likeIcon2.alt = "Heart icon - liked";
         likeIcon2.className = "heart_full";
         
         mediaLike.appendChild(likeIcon);
         likeIcon.appendChild(likeIcon1);
         likeIcon.appendChild(likeIcon2);
+    
+        likeIcon.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                changeLikeState();
+            }
+        });
 
         likeIcon.addEventListener("click", () => {
+            changeLikeState();
+        });
+
+        function changeLikeState() {
             let DOMLikes = parseInt(likeNb.innerText);
             
             if (DOMLikes === mediaItem.likes) {
@@ -120,24 +142,78 @@ function displayMedia(media) {
         
             // Mettez à jour l'affichage du nombre total de likes
             totalLikesElement.textContent = totalLikes;
-        });
-
+        };
+    
         mediaElement.appendChild(mediaContent);
         mediaElement.appendChild(mediaInfo);
         mediaInfo.appendChild(mediaTitle);
         mediaInfo.appendChild(mediaLike);
-        mediaSection.appendChild(mediaElement);
-		totalLikes += mediaItem.likes;
+        totalLikes += mediaItem.likes;
+        
+        // Ajout de la classe "tabbable" pour permettre la navigation avec la touche "Tab"
+        mediaElement.classList.add("tabbable");
+
+        const tabbableElement = document.createElement("div");
+        tabbableElement.className = "tabbable";
+
+        mediaElement.appendChild(tabbableElement);
+
+        mediaElement.addEventListener("keydown", function (event) {
+            if (event.key === "Tab") {
+                // Trouver tous les éléments "tabbable" dans le média actuel
+                const tabbableElements = mediaElement.querySelectorAll(".tabbable");
+
+                // Trouver l'index de l'élément actuellement focus
+                const currentIndex = Array.from(tabbableElements).indexOf(document.activeElement);
+
+                // Déterminer le prochain index dans la liste circulaire
+                const nextIndex = (currentIndex + 1) % tabbableElements.length;
+
+                // Mettre le focus sur le prochain élément "tabbable"
+                tabbableElements[nextIndex].focus();
+            }
+        });
+
+        return mediaElement; // Ajout de cette ligne pour retourner mediaElement
+    }
+    
+    // Fonction pour générer le texte alternatif en fonction du titre du média
+    function generateAltText(mediaItem) {
+        return mediaItem.title;
+    }
+
+    return {getUserMediaDOM};
+}
+
+// Afficher les medias du photographes
+async function displayMedia(media) {
+    const mediaSection = document.querySelector(".media");
+
+    // Effacez le contenu existant
+    mediaSection.innerHTML = "";
+
+    totalLikes = 0; // Initialisez totalLikes ici
+
+    media.forEach((mediaItem, index) => {
+        const { getUserMediaDOM } = mediaTemplate(mediaItem, index);
+        const userMediaDOM = getUserMediaDOM();
+        mediaSection.appendChild(userMediaDOM);
     });
 
+    // Création de l'onglet en bas à droite
+    const ongletSection = document.querySelector(".onglet");
+    const totalLike = document.createElement("div");
+    totalLike.className = "total-like";
+    
     ongletSection.innerHTML = "";
-    const totalLikesElement = document.createElement("p");
+
+    totalLikesElement = document.createElement("p"); // Utilisez la variable globale
     totalLikesElement.textContent = totalLikes;
     const likeIcon = document.createElement("i");
     likeIcon.className = "fa-solid fa-heart";
     const photographerPrice = document.createElement("p");
     photographerPrice.textContent = `${photographer.price}€ / jour`
-    
+
     ongletSection.appendChild(totalLike);
     totalLike.appendChild(totalLikesElement);
     totalLike.appendChild(likeIcon);

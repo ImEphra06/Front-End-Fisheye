@@ -14,13 +14,20 @@ function openLightbox(index) {
         if (selectedMedia.image) {
             const image = document.createElement("img");
             image.src = selectedMedia.image;
+            image.alt = generateAltText(selectedMedia);
             lightboxContent.appendChild(image);
         } else if (selectedMedia.video) {
             const video = document.createElement("video");
             video.src = selectedMedia.video;
+            video.alt = generateAltText(selectedMedia);
             lightboxContent.appendChild(video);
+            video.controls = 'controls';
         }
 
+        function generateAltText(selectedMedia) {
+            return selectedMedia.title;
+        }
+        
         const titrePhotoLightbox = document.getElementById("titre-photo-lightbox");
         titrePhotoLightbox.textContent = selectedMedia.title;
     }
