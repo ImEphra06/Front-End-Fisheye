@@ -27,10 +27,12 @@
 
     <section class="sort" id="sort-dropdown">
       <div class="sort-txt">Trier par</div>
-      <div class="sort-btn">---</div>
+      <div class="sort-btn">---<i class="fa-solid fa-chevron-down"></i></div>
       <div class="sort-element">
-        <div class="dropdown-option" data-sort="Popularité">Popularité</div>
+        <div class="dropdown-option" data-sort="Popularité">Popularité<i class="fa-solid fa-chevron-up"></i></div>
+        <div class="line"></div>
         <div class="dropdown-option" data-sort="Date">Date</div>
+        <div class="line"></div>
         <div class="dropdown-option" data-sort="Titre">Titre</div>
       </div>
     </section>
@@ -63,7 +65,7 @@
       <input title="Modifier le nom" class="champ-form action-form" id="form-lastname" type="text" required
         tabindex="0">
       <label class="label-form">Email</label>
-      <input title="Modifier l'email" class="champ-form action-form" id="form-email" type="text" required tabindex="0">
+      <input title="Modifier l'email" class="champ-form action-form" id="form-email" type="email" required tabindex="0">
       <label class="label-form">Votre message</label>
       <textarea title="Modifier le message" class="champ-form action-form" id="form-message" required
         tabindex="0"></textarea>

@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     dropdownBtn.addEventListener('click', function () {
         dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+        dropdownBtn.classList.toggle('active');
     });
 
     dropdownOptions.forEach(function (option) {
@@ -49,3 +50,4 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+

@@ -20,21 +20,21 @@
     padding: 0 20px;
 }
 
-.photograph-header .info h2 {
+.photograph-header .info h1 {
     color: #D3573C;
     font-weight: 400;
     font-size: 64px;
     margin: 20px 0px 10px 0px;
 }
 
-.photograph-header .info h3 {
+.photograph-header .info h2 {
     color: #901C1C;
     font-size: 24px;
     font-weight: 400;
     margin: 0px 0px 3px 0px;
 }
 
-.photograph-header .info h4 {
+.photograph-header .info h3 {
     color: #525252;
     font-weight: 400;
     font-size: 18px;
@@ -63,7 +63,7 @@
 
 .contact-button:hover {
     background-color: #d3573c;
-    color: #525252;
+    color: #000;
     cursor: pointer;
 }
 
@@ -87,13 +87,19 @@
     justify-content: center;
     align-items: center;
     background-color: #901C1C;
-    border: none;
     border-radius: 5px;
     color: #ffffff;
     font-size: 18px;
     height: 60px;
-    padding: 0 5px;
     width: 150px;
+    position: relative;
+}
+
+.sort-btn .fa-chevron-down {
+    display: flex;
+    position: absolute;
+    left: 120px;
+    z-index: 99;
 }
 
 .sort-element {
@@ -109,20 +115,26 @@
 
 .dropdown-option {
     display: flex;
-    justify-content: center;
+    padding-left: 20px;
+    gap: 35px;
     align-items: center;
     background-color: #901C1C;
-    border-top: 1px solid #ffffff;
-    padding: 10px;
     cursor: pointer;
     height: 60px;
-    padding: 0 5px;
     width: 150px;
     color: #ffffff;
 }
 
 .dropdown-option:hover {
     background-color: #d3573c;
+}
+
+.line {
+    display: block;
+    border-top: 1px solid #ffffff;
+    background-color: #901C1C;
+    width: 100px;
+    margin: 0px 25px;
 }
 
 

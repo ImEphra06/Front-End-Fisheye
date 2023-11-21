@@ -13,11 +13,11 @@ function photographerProfil(data) {
         const info = document.createElement("div");
         info.className = "info";
         
-        const photographerName = document.createElement("h2");
+        const photographerName = document.createElement("h1");
         photographerName.textContent = name;
-        const photographerLocation = document.createElement("h3");
+        const photographerLocation = document.createElement("h2");
         photographerLocation.innerText = `${city}, ${country}`;
-        const photographerTag = document.createElement("h4");
+        const photographerTag = document.createElement("h3");
         photographerTag.textContent = tagline;
         const photographerImg = document.createElement("img");
         photographerImg.src = portrait;
