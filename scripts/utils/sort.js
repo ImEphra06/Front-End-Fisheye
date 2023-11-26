@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     const dropdown = document.getElementById("sort-dropdown");
     const dropdownBtn = dropdown.querySelector(".sort-btn");
+    let fleche = document.createElement('img');
+    fleche.className = "chevron-down";
+    fleche.src = 'images/icons/chevron-down-solid.svg';
     dropdownBtn.setAttribute("tabindex", "0");
     const dropdownContent = dropdown.querySelector(".sort-element");
     const dropdownOptions = dropdown.querySelectorAll(".dropdown-option");
@@ -15,7 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const selectedOption = option.getAttribute("data-sort");
 
             // Mise à jour du texte du bouton avec l'option sélectionnée
-            dropdownBtn.textContent = selectedOption;
+            dropdownBtn.textContent = `${selectedOption} `;
+            dropdownBtn.appendChild(fleche); // Ajoutez à nouveau la flèche à la fin du texte
 
             switch (selectedOption) {
                 case "Popularité":
@@ -50,4 +54,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
