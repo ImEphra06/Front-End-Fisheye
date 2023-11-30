@@ -1,16 +1,47 @@
 document.addEventListener('DOMContentLoaded', function () {
     const dropdown = document.getElementById("sort-dropdown");
     const dropdownBtn = dropdown.querySelector(".sort-btn");
-    let fleche = document.createElement('img');
+    const fleche = document.createElement('img');
     fleche.className = "chevron-down";
     fleche.src = 'images/icons/chevron-down-solid.svg';
     dropdownBtn.setAttribute("tabindex", "0");
     const dropdownContent = dropdown.querySelector(".sort-element");
     const dropdownOptions = dropdown.querySelectorAll(".dropdown-option");
 
+    // Fonction pour ouvrir le menu déroulant
+    function openDropdown() {
+        dropdownContent.style.display = 'block';
+        dropdownBtn.classList.add('active');
+    }
+
+    // Fonction pour fermer le menu déroulant
+    function closeDropdown() {
+        dropdownContent.style.display = 'none';
+        dropdownBtn.classList.remove('active');
+    }
+
     dropdownBtn.addEventListener('click', function () {
-        dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
-        dropdownBtn.classList.toggle('active');
+        // Utilisez la fonction openDropdown pour ouvrir/fermer le menu déroulant au clic
+        if (dropdownContent.style.display === 'block') {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    });
+
+    // Ajoutez des écouteurs d'événements clavier
+    dropdownBtn.addEventListener('keydown', function (event) {
+        // Si la touche "Entrée" est pressée, ouvrez le menu déroulant
+        if (event.key === 'Enter') {
+            openDropdown();
+        }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        // Si la touche "Échap" est pressée, fermez le menu déroulant
+        if (event.key === 'Escape') {
+            closeDropdown();
+        }
     });
 
     dropdownOptions.forEach(function (option) {
@@ -19,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Mise à jour du texte du bouton avec l'option sélectionnée
             dropdownBtn.textContent = `${selectedOption} `;
-            dropdownBtn.appendChild(fleche); // Ajoutez à nouveau la flèche à la fin du texte
+            dropdownBtn.appendChild(fleche);
 
             switch (selectedOption) {
                 case "Popularité":
@@ -51,6 +82,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('click', function (event) {
         if (!dropdown.contains(event.target)) {
             dropdownContent.style.display = 'none';
-        }
+        }               
     });
 });
