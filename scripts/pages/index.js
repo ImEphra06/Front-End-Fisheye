@@ -18,7 +18,7 @@ function photographerTemplate(data) {
 
         const photographerImg = document.createElement("img");
         photographerImg.src = portrait;
-        photographerImg.alt = `Photographer portrait - ${name}`;
+        photographerImg.setAttribute('aria-label', 'Photographer portrait - ' + name);
         const photographerName = document.createElement("h2");
         photographerName.textContent = name;
         const photographerLocation = document.createElement("h3");

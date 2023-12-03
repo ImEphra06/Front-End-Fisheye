@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const fleche = document.createElement('img');
     fleche.className = "chevron-down";
     fleche.src = 'images/icons/chevron-down-solid.svg';
+    fleche.setAttribute('aria-label', 'Développer les optionsN');
     dropdownBtn.setAttribute("tabindex", "0");
     const dropdownContent = dropdown.querySelector(".sort-element");
     const dropdownOptions = dropdown.querySelectorAll(".dropdown-option");

@@ -377,7 +377,6 @@ textarea.champ-form {
 /***** Informations like et tarif *****/
 .onglet {
     display: flex;
-    gap: 60px;
     background-color: #DB8876;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -392,7 +391,12 @@ textarea.champ-form {
 
 .onglet .total-like {
     display: flex; 
-    gap: 5px;
+    padding-right: 5px;
+}
+
+.onglet .fa-solid {
+    display: flex; 
+    padding-right: 60px;
 }
 
 .onglet p {
